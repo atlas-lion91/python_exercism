@@ -21,9 +21,14 @@ A reactor is said to be critical if it satisfies the following conditions:
 Implement the function `is_criticality_balanced()` that takes `temperature` measured in kelvin and `neutrons_emitted` as parameters, and returns `True` if the criticality conditions are met, `False` if not.
 
 ```python
->>> is_criticality_balanced(750, 600)
-True
+def is_criticality_balanced(temperature, neutrons_emitted):
+    if temperature < 800 and neutrons_emitted > 500 and temperature * neutrons_emitted < 500000:
+        return True
+    else:
+        return False
+    """Verify criticality is balanced.
 ```
+
 
 ## 2. Determine the Power output range
 
@@ -45,8 +50,19 @@ Implement the function `reactor_efficiency(<voltage>, <current>, <theoretical_ma
 This function should return the efficiency band of the reactor : 'green', 'orange', 'red', or 'black'.
 
 ```python
->>> reactor_efficiency(200,50,15000)
-'orange'
+def reactor_efficiency(voltage, current, theoretical_max_power):
+  
+    generated_power = voltage * current
+    efficiency_percentage = (generated_power/theoretical_max_power) * 100
+    
+    if efficiency_percentage >= 80:
+        return 'green'
+    elif efficiency_percentage >= 60:
+        return 'orange'
+    elif efficiency_percentage >= 30:
+        return 'red'
+    else:
+        return 'black'
 ```
 
 ## 3. Fail Safe Mechanism
@@ -67,6 +83,27 @@ Implement the function called `fail_safe()`, which takes 3 parameters: `temperat
   going into meltdown and a status code of 'DANGER' must be passed to immediately shut down the reactor.
 
 ```python
->>> fail_safe(temperature=1000, neutrons_produced_per_second=30, threshold=5000)
-'DANGER'
+def fail_safe(temperature, neutrons_produced_per_second, threshold):
+    output = temperature * neutrons_produced_per_second
+    lower_threshold = threshold * 0.9
+    upper_threshold = threshold * 1.1
+
+    if output < lower_threshold:
+        return 'LOW'
+    elif lower_threshold <= output <= upper_threshold:
+        return 'NORMAL'
+    else: 
+        return 'DANGER'
 ```
+
+
+
+
+
+
+
+
+
+
+        
+   
