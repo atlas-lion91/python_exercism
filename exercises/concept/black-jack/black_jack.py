@@ -15,7 +15,13 @@ def value_of_card(card):
     2.  'A' (ace card) = 1
     3.  '2' - '10' = numerical value.
     """
-
+if card in ['J', 'K', 'Q']:
+    return 10
+elif card == 'A':
+    return 1
+else:
+    return int(card)
+    
     pass
 
 
