@@ -57,7 +57,27 @@ def value_of_ace(card_one, card_two):
     2.  'A' (ace card) = 11 (if already in hand)
     3.  '2' - '10' = numerical value.
     """
+def value_of_ace(card_one, card_two):
+    """Calculate the most advantageous value for the ace card.
 
+    :param card_one, card_two: str - card dealt. See below for values.
+    :return: int - either 1 or 11 value of the upcoming ace card.
+
+    1.  'J', 'Q', or 'K' (otherwise known as "face cards") = 10
+    2.  'A' (ace card) = 11 (if already in hand)
+    3.  '2' - '10' = numerical value.
+    """
+    total_value = value_of_card(card_one) + value_of_card(card_two)
+    
+    # If there's already an ace in hand
+    if 'A' in [card_one, card_two]:
+        return 1
+    # If total value is 10 or less
+    elif total_value <= 10:
+        return 11
+    # If total value is more than 10
+    else:
+        return 1
     pass
 
 
@@ -71,6 +91,14 @@ def is_blackjack(card_one, card_two):
     2.  'A' (ace card) = 11 (if already in hand)
     3.  '2' - '10' = numerical value.
     """
+    total_value = value_of_card(card_one) + value_of_card(card_two)
+    
+    if card_one == 'A' and card_two in ['10', 'K', 'Q', 'J']:
+        return True
+    elif card_two == 'A' and card_one in ['10', 'K', 'Q', 'J']:
+        return True
+    else:
+        return False
 
     pass
 
